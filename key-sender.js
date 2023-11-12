@@ -11,7 +11,9 @@ module.exports = function() {
         "caseCorrection": null,
         "globalDelayPressMillisec": null,
         "globalDelayBetweenMillisec": null,
-        "extra": null
+        "extra": null,
+        "jrePath": "java.exe",
+        "jarPath": path.join(__dirname, 'jar', 'key-sender.jar')
     };
 
     module.BATCH_EVENT_KEY_PRESS = 1;
@@ -110,9 +112,7 @@ module.exports = function() {
 
     module.execute = function(arrParams) {
         return new Promise(function(resolve, reject) {
-            var jarPath = path.join(__dirname, 'jar', 'key-sender.jar');
-
-            var command = 'java -jar \"' + jarPath + '\" ' + arrParams.join(' ') + module.getCommandLineOptions();
+            var command = options.jrePath + ' -jar \"' + options.jarPath + '\" ' + arrParams.join(' ') + module.getCommandLineOptions();
 
             return exec(command, {}, function(error, stdout, stderr) {
                 if (error == null) {
