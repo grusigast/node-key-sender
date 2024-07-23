@@ -285,5 +285,9 @@ module.exports = function() {
         return options;
     };
 
+    module.setWindowFocus = function(windowTitle) {
+        return module.execute(['-focus ' + windowTitle])
+    }
+
     return module;
 }();
